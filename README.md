@@ -27,3 +27,5 @@ PROJECT LAYOUT
     - if possible can they order online? / phone number
     - any other info
     * Smash or Pass buttons *
+
+Zomato API Key: 1027d5a8e746a4bf1dbc87c98fc6dc0c
