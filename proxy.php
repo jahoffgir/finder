@@ -1,7 +1,7 @@
 <?php
 
-error_reporting(0);
-define ('HOSTNAME', 'https://developers.zomato.com/api/v2.1/');
+	error_reporting(0);
+	define ('HOSTNAME', 'https://developers.zomato.com/api/v2.1/');
 
 
 	$url=HOSTNAME.$_GET['path'];
