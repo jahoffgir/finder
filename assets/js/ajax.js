@@ -3,13 +3,13 @@
  * two parameters: t, type of request - get or post
  * 				   d, path to get to data in API
  */
- function zFLT(t,d){
+ function zFLT( t, d ){
  	return $.ajax({
- 		type:t,
- 		cache:false,
- 		async:true,
- 		dataType:'json',
- 		url:'proxy.php',
- 		data:d,
+ 		type: t,
+ 		cache: false,
+ 		async: true,
+ 		dataType: 'json',
+ 		url: 'proxy.php',
+ 		data: d,
  	}); // end ajax function
  } // end myXHR
