@@ -1,4 +1,4 @@
-# finder
+# finnder
 BrickHack4 - Finder
 
 Team Members
