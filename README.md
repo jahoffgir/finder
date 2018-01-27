@@ -1,14 +1,13 @@
 # finnder
-BrickHack4 - Finnder
-Like Tinder, users will "smash" or "pass" on foods and will determine where they will want to eat it in. 
-Team Members
+BrickHack4 - Finnder Like Tinder: users will "smash" or "pass" on foods and will determine where they will want to eat it in. 
+# Team Members
 * Brett Patterson
 * Isabella Sturm
 * Jahongir Amirkulov 
 * Karthik Iyer
 
 
-PROJECT LAYOUT
+# PROJECT LAYOUT
 - Sign-in: possibly use Facebook sign-in
 - Profile:
     - Preferences: food categories
