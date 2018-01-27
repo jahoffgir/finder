@@ -28,3 +28,4 @@ BrickHack4 - Finnder Like Tinder: users will "smash" or "pass" on foods and will
     * Smash or Pass buttons *
 
 Zomato API Key: 1027d5a8e746a4bf1dbc87c98fc6dc0c
+Google API Key: AIzaSyC4251SJyy4ClZ7NWsumqqG1c0zpui0ViU 
