@@ -8,16 +8,14 @@
  *
  * - zomato-js-sdk for using Zomato API Library functions
  *   https://github.com/ameykshirsagar/zomato-js-sdk
- /
-
-
-/*
- * Function to get location of the user
  */
 
 
+/**
+ * Function to get location of the user
+ */
 function getLocation() {
-    if( !navigator.geolocation ) {
+    if( ! navigator.geolocation ) {
 	 	// do something
 	 	// maybe we should make the user enter address or zip code or
 	 	// if address or zip is saved to profile pull it
@@ -29,14 +27,16 @@ function getLocation() {
 	}
  }
 
-/*
+
+/**
  * Function to handle success of getting current position
  */
  function getLocationSuccess( position ) {
-     
-     Zomato.geocode( {
-         location: { position.coords.latitude, position.coords.longitude },
-         function( restaurants ) {
+     var latlng = {
+         lat: position.coords.latitude,
+         lon: position.coords.longitude
+     }
+     Zomato.geocode( latlng, function( restaurants ) {
              // we got the restaurants, what do we do now? 
              var restaurantObjects = new Array();
              for( restaurant in restaurants.best_rated_restaurant ) {
@@ -56,21 +56,22 @@ function getLocation() {
          function( error ) {
              // life sucks, search failed
          }
-     } );
+     );
     
  }
 
 
-/*
+/**
  * Function to handle failure to get current position
  */
- function getLocationFailure() {
+function getLocationFailure() {
      // we need to access user profile's default location
      alert( "Yikes! There was an unknown error in getting your location!" );
- }
+}
 
 
-/*
+
+/**
  * TO DO
  * - Get user prompt for location access
  */
