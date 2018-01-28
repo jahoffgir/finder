@@ -38,7 +38,7 @@ function zomatoCall( latlng ) {
                 menu_url: r.menu_url
             } );
         }
-        localStorage.setItem( "restaurants", restaurantObjects );
+        sessionStorage.setItem( "restaurants", restaurantObjects );
         return;
     }, function( error ) {
         alert( "Your search returned no results!" );
@@ -72,9 +72,9 @@ function getLocationSuccess( position ) {
     var latlng = {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
-    };
+    }
     zomatoCall( latlng );
-    return latlng;
+    return;
 }
 
 
@@ -83,7 +83,7 @@ function getLocationSuccess( position ) {
  */
 function getLocationFailure() {
     alert( "Yikes! There was an unknown error in getting your location!" );
-    // return;
+    return;
 }
 
 

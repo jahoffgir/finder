@@ -10,7 +10,6 @@
     <title>Finnder like Tinder</title>
     <link rel="shortcut icon" href="media/logo.png" type="image/x-icon">
 
-
     <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
@@ -22,24 +21,23 @@
     <script src="assets/js/zomato.js" type="text/javascript"></script>
 
     <script>
-        localStorage.setItem( "ZOMATO_API_KEY", "1027d5a8e746a4bf1dbc87c98fc6dc0c");
-        localStorage.setItem( "GOOGLE_API_KEY", "AIzaSyC4251SJyy4ClZ7NWsumqqG1c0zpui0ViU");
-        Zomato.init( { "key": localStorage.getItem( "ZOMATO_API_KEY" ) } );
+        sessionStorage.setItem( "ZOMATO_API_KEY", "1027d5a8e746a4bf1dbc87c98fc6dc0c");
+        sessionStorage.setItem( "GOOGLE_API_KEY", "AIzaSyC4251SJyy4ClZ7NWsumqqG1c0zpui0ViU");
+        Zomato.init( { "key": sessionStorage.getItem( "ZOMATO_API_KEY" ) } );
     </script>
 
     <script src='assets/js/locate.js' type='text/javascript'></script>
 
 
-    <!--This makes the nav bar appear-->
+
     <!--http://api.jquery.com/load/>-->
 
     <script src="jquery-3.3.1.js"></script>
     
     <script>
-        $(function(){
+        $(function(){ <!--This makes the nav bar appear-->
             $("#includedContent").load("navBar.html");
         });
-
     </script>
 
 </head>
@@ -49,34 +47,42 @@
     <h1>Watcha lookin' for, bud?</h1>
 
 
-    <div id="information">
-            Location: <input type="text" id="locationInfo" name="locationInfo">
+    <!--<div id="information">-->
+            <!--Location: <input type="text" id="locationInfo" name="locationInfo">-->
 
-                <!-- The first one will be selected initially, field is required-->
-                <select name="locaF" id="dropdownInfo" required>
-                    <option value="city" selected>City</option>
-                    <option value="zip">Zip</option>
-                </select>
-    </div>
-
-    <p id="demo"></p>
+                <!--&lt;!&ndash; The first one will be selected initially, field is required&ndash;&gt;-->
+                <!--<select name="locaF" id="dropdownInfo" required>-->
+                    <!--<option value="city" selected>City</option>-->
+                    <!--<option value="zip">Zip</option>-->
+                <!--</select>-->
+    <!--</div>-->
 
     <div id="buttonDIV">
-        <button name="enter" type="submit" id="enterB" onclick="submitFunction()">Enter</button>
-        <script>
-            function submitFunction(){
-                var ddI = document.getElementById("dropdownInfo").value; <!-- This isn't actually used but i'll keep it-->
-                var locI = document.getElementById("locationInfo").value;
+        <!--<button name="enter" type="submit" id="enterB" onclick="submitFunction()">Enter</button>-->
+        <!--<script>-->
+            <!--function submitFunction(){-->
+                <!--var ddI = document.getElementById("dropdownInfo").value; &lt;!&ndash; This isn't actually used but i'll keep it&ndash;&gt;-->
+                <!--var locI = document.getElementById("locationInfo").value;-->
 
-                // console.log(loc)
-                addressToRestaurants(locI)
-            }
-        </script>
+                <!--console.log(locI)-->
+                <!--addressToRestaurants(locI)-->
 
-        <h3>OR</h3>
+                <!--window.location.href = "browse.html"-->
+            <!--}-->
+        <!--// </script>-->
+
+
+
+        <!--<h3>OR</h3>-->
 
             <!--The user has selected to use their current location-->
-            <button type="submit" id="currentLocationButton" onclick="getLocation()">Use Current Location</button>
+            <button type="submit" id="currentLocationButton" onclick="submitFunction()">Use Current Location</button>
+            <script>
+                function submitFunction(){
+                    getLocation()
+                    window.location = 'browse.html'
+                }
+            </script>
 
     </div>
 
