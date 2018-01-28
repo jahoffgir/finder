@@ -27,7 +27,8 @@
         Zomato.init( { "key": localStorage.getItem( "ZOMATO_API_KEY" ) } );
     </script>
 
-    <script src='assets/js/locate.js' type='text/javascript/'></script>
+    <script src='assets/js/locate.js' type='text/javascript'></script>
+
 
     <!--This makes the nav bar appear-->
     <!--http://api.jquery.com/load/>-->
@@ -72,16 +73,13 @@
 
         <h3>OR</h3>
 
-        <form>
             <!--The user has selected to use their current location-->
-            <button name="currLoc" type="submit" id="currentLocationButton" onclick="getLocation()">Use Current Location</button>
-        </form>
-
-        <!--<button onclick="getLocation()">Try It</button>-->
-
-
+            <button type="submit" id="currentLocationButton" onclick="getLocation()">Use Current Location</button>
 
     </div>
+
+
+
 
     <!--localStorage.setItem("Input_Location": document.getElementById('inputLocation').value) // whatever you call it-->
     <!--// or... document.getElementByName('location')-->

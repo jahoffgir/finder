@@ -71,9 +71,9 @@ function getLocationSuccess( position ) {
     var latlng = {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
-    }
+    };
     zomatoCall( latlng );
-    return;
+    return latlng;
 }
 
 
@@ -82,7 +82,7 @@ function getLocationSuccess( position ) {
  */
 function getLocationFailure() {
     alert( "Yikes! There was an unknown error in getting your location!" );
-    return;
+    // return;
 }
 
 
