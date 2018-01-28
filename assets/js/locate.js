@@ -22,27 +22,53 @@ function zomatoCall( latlng ) {
         // we got the restaurants, populate and return
         var restaurantObjects = new Array();
         var nearbyRestaurants = restaurants.nearby_restaurants;
-        
+        console.log( localStorage.getItem( "ZOMATO_API_ID" ) );
         for( var i = 0; i < Object.keys( nearbyRestaurants ).length; i++ ) {
             var r = nearbyRestaurants[ i ].restaurant;
             console.log( r.name );
-            restaurantObjects.push( {
-                name: r.name,
-                url: r.url,
-                location: r.location,
-                cuisine: r.cuisine,
-                price_range: r.price_range,
-                user_rating: r.user_rating,
-                featured_image: r.featured_image,
-                menu_url: r.menu_url
-            } );
+            restaurantObjects.push( [
+                r.name,
+                r.url,
+                r.location,
+                r.cuisine,
+                r.price_range,
+                r.user_rating,
+                r.featured_image,
+                r.menu_url
+            ] );
         }
+        console.log( restaurantObjects );
         localStorage.setItem( "restaurants", restaurantObjects );
         return;
     }, function( error ) {
         alert( "Your search returned no results!" );
         return;
     } )
+}
+
+
+/**
+ * Function to handle success of getting current location
+ * Uses zomato-js-sdk to pull restaurants in vicinity of location
+ * Creates array of restaurant objects with relevant information
+ */
+function getLocationSuccess( position ) {
+    var latlng = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+    }
+    console.log( latlng );
+    zomatoCall( latlng );
+    return;
+}
+
+
+/**
+ * Function to handle failure to get current position
+ */
+function getLocationFailure() {
+    alert( "Yikes! There was an unknown error in getting your location!" );
+    return;
 }
 
 
@@ -62,42 +88,20 @@ function getLocation() {
  }
 
 
-/**
- * Function to handle success of getting current location
- * Uses zomato-js-sdk to pull restaurants in vicinity of location
- * Creates array of restaurant objects with relevant information
- */
-function getLocationSuccess( position ) {
-    var latlng = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-    };
-    zomatoCall( latlng );
-    return latlng;
-}
-
-
-/**
- * Function to handle failure to get current position
- */
-function getLocationFailure() {
-    alert( "Yikes! There was an unknown error in getting your location!" );
-    // return;
-}
-
-
 function addressToRestaurants( address ) {
     // Initialize the geocoder
+    console.log( address );
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode( {
-        address: address
+        "address": address
     }, function( results, status ) {
         if( status === google.maps.GeocoderStatus.OK ) { 
             // geocoding successful
             var latlng = {
-                latitude: results[ 0 ].geometry.location.latitude,
-                longitude: results[ 0 ].geometry.location.longitude
+                latitude: results[ 0 ].geometry.location.lat,
+                longitude: results[ 0 ].geometry.location.lng
             };
+            console.log( latlng );
             zomatoCall( latlng );
             return;
         }

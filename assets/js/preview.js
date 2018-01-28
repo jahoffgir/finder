@@ -5,6 +5,7 @@
  * @param index - index of the restaurant from object in local storage
  */
  // NOTE: index will incrememented and updated in local storage anytime smash/pass 
+ localStorage.setItem("index":0);
  function getRestaurantPreview(index){
 	// 	get restaurant at the specific index
 	var $restaurant = localStorage.getItem('restaurants')[index];
@@ -20,9 +21,30 @@
 	var $img = $('<img>', {'src': $featuredImage});
 	$('#feat-img-div').append($img);
 
-	// populate all the additional info - 
-	var $city;
-	var $price;
-	var $rating;
-	var $cousine;
+	// populate all the additional info to the respective div
+	var $city = $restaurant.location.city;
+	var $price = $restaurant.price_range;
+	var $rating = 'Rating: ' +$restaurant.user_rating.aggregated_rating;
+	var $cousine = $restaurant.cousine;
+
+	var $cityTag = $('<span>', {'id'='city'});
+	$cityTag.append($city);
+	var $priceTag = $('<span>', {'id'='price'});
+	var $priceToUSD;	// $price is an integer, translate to srting of $'s
+	for(var i = 0; i < $price; i++){
+		$priceTag += '$';
+	}
+	$priceTag.append($priceToUSD);
+	var $ratingTag = $('<p>', {'id'='rating'});
+	$ratingTag.append($rating);
+	var $cousineTag = $('<p>', {'id'='cousine'});
+	$cousineTag.append($cousine);
+
+	$('#previewInfo').append($cousine);
+	$('#previewInfo').append($cityTag);
+	$('#previewInfo').append($priceTag);
+	$('#previewInfo').append($ratingTag);
+	
+
+	localStorage.setItem("index", index+1);
  }

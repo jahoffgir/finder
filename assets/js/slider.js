@@ -106,6 +106,8 @@ if (navigator.msMaxTouchPoints) {
                     el.setAttribute("src", " ");
                     document.getElementsByClassName('slide')[0].parentNode.appendChild(el);
                 }
+                
+                
                 indx = localStorage.getItem("curser");
                 arr = localStorage.getItem("restaurants");
                 // Adds a different restaurant pic
