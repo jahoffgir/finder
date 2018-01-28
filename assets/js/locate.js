@@ -22,21 +22,20 @@ function zomatoCall( latlng ) {
         // we got the restaurants, populate and return
         var restaurantObjects = new Array();
         var nearbyRestaurants = restaurants.nearby_restaurants;
-        
+        console.log( sessionStorage.getItem( "ZOMATO_API_ID" ) );
         for( var i = 0; i < Object.keys( nearbyRestaurants ).length; i++ ) {
             var r = nearbyRestaurants[ i ].restaurant;
-            console.log( localStorage.getItem( "ZOMATO_API_ID" ) );
             console.log( r.name );
-            restaurantObjects.push( {
-                name: r.name,
-                url: r.url,
-                location: r.location,
-                cuisine: r.cuisine,
-                price_range: r.price_range,
-                user_rating: r.user_rating,
-                featured_image: r.featured_image,
-                menu_url: r.menu_url
-            } );
+            restaurantObjects.push( [
+                r.name,
+                r.url,
+                r.location,
+                r.cuisine,
+                r.price_range,
+                r.user_rating,
+                r.featured_image,
+                                   r.menu_url
+            ] );
         }
         sessionStorage.setItem( "restaurants", restaurantObjects );
         return;
