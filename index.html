@@ -48,26 +48,26 @@
 
 
     <div id="information">
-        <form>
-            Location: <input type="text" name="locationInfo">
+            Location: <input type="text" id="locationInfo" name="locationInfo">
 
                 <!-- The first one will be selected initially, field is required-->
-                <select name="locaF" required> <!--Supplement an id here instead of using 'text'-->
+                <select name="locaF" id="dropdownInfo" required>
                     <option value="city" selected>City</option>
                     <option value="zip">Zip</option>
                 </select>
-        </form>
     </div>
 
     <p id="demo"></p>
 
     <div id="buttonDIV">
-        <button name="enter" type="submit" value="Submit" id="enterB" onclick="sumbitFunction()">Enter</button>
-        <!--<script> var enteredInfo = document.getElementsByTagName("locaB")  <p>enteredInfo</p> </script>-->
+        <button name="enter" type="submit" id="enterB" onclick="submitFunction()">Enter</button>
         <script>
-            function sumbitFunction(){
+            function submitFunction(){
+                var ddI = document.getElementById("dropdownInfo").value; <!-- This isn't actually used but i'll keep it-->
+                var locI = document.getElementById("locationInfo").value;
 
-                // localStorage.setItem("locationInfo")
+                // console.log(loc)
+                addressToRestaurants(locI)
             }
         </script>
 
@@ -77,16 +77,6 @@
             <button type="submit" id="currentLocationButton" onclick="getLocation()">Use Current Location</button>
 
     </div>
-
-
-
-
-    <!--localStorage.setItem("Input_Location": document.getElementById('inputLocation').value) // whatever you call it-->
-    <!--// or... document.getElementByName('location')-->
-    <!--localStorage.setItem("Input_LocaType": document.getElementById('selectInput').selected // maybe selected.value-->
-
-
-
 
     <footer> <!--This makes the footer appear-->
         <img src="media/biglogo.png" alt="Big Logo" height="15%" width="15%">
