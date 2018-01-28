@@ -2,38 +2,27 @@
  * Pull information to get the restaurant's preview profile
  * This is the view the user sees that may entice them to click to get more info
  * or immediate Smash or Pass ;)
- * @param id - id of the restaurant
- * 		found in /restaurant.id
+ * @param index - index of the restaurant from object in local storage
  */
+ // NOTE: index will incrememented and updated in local storage anytime smash/pass 
+ function getRestaurantPreview(index){
+	// 	get restaurant at the specific index
+	var $restaurant = localStorage.getItem('restaurants')[index];
 
- 
- function getRestaurantPreview(id){
-	// call our special ajax function
-	zFLT({'path':'/restaurant/','user-key':'1027d5a8e746a4bf1dbc87c98fc6dc0c','res_id':id}).done(function(json){
-		console.log('enter zFTL');
-		// info to get: name, featured_image, user_ratind.aggregate_rating, location.city
-		var $restaurantName = json.name;
-		var $featuredImg = json.featured_image;
-		console.log('test: '+json.featured_image);
-		var $rating = json.user_rating.aggregate_rating; // this may be wrong, may have to query array
-		var $city = json.location.city;
+	// create h1 tag with restaurant name
+	var $restaurantName = $restaurant.name;
+	var $h1 = $('<h1>'); // create h1 tag to append to the DOM
+	$h1.append($restaurantName); // append restaurant name to the h1
+	$('#restaurantName-div').append($h1); // append h1 to the DOM
 
-		// dynamically populate the page - browse.html
-		// create image object to append to the page - define the tag, then define attributes in JSON format
-		var $featImgTag = $('<img>',{'src':$featuredImg, 'id':'featImg'});
-		$featImgTag.append($featuredImg);
-		// #previewImage is a div setup in browse.html
-		$('#previewImage').append($featImgTag);
+	// create featured image 
+	var $featuredImage = $restaurant.featured_image;
+	var $img = $('<img>', {'src': $featuredImage});
+	$('#feat-img-div').append($img);
 
-		console.log('name: '+$restaurantName);
-		console.log('img: ' +$featuredImg);
-		console.log('rating: ' +$rating);
-		console.log('city: ' +$city);
-
-
-	});
+	// populate all the additional info - 
+	var $city;
+	var $price;
+	var $rating;
+	var $cousine;
  }
-
- $(document).ready(function(){
- 	getRestaurantPreview('16774318');
- });

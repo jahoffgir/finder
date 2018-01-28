@@ -25,6 +25,7 @@ function zomatoCall( latlng ) {
         
         for( var i = 0; i < Object.keys( nearbyRestaurants ).length; i++ ) {
             var r = nearbyRestaurants[ i ].restaurant;
+            console.log( r.name );
             restaurantObjects.push( {
                 name: r.name,
                 url: r.url,
