@@ -24,6 +24,28 @@
         $(function(){
             $("#includedContent").load("navBar.html");
         });
+
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
     </script>
 
 </head>
@@ -31,7 +53,35 @@
     <!--<img src="media/logo.png" alt="Logo of Finnder like Tinder">-->
     <!--This makes the nav bar appear-->
     <div id="includedContent"></div>
-    <h1>Index page</h1>
+    <!--<h1>Index page</h1>-->
+
+
+    <h1>Watcha lookin' for, bud?</h1>
+
+
+    <div id="information">
+        <form>
+            Location: <input type="text" name="locaB">
+
+                <!-- The first one will be selected initially, field is required-->
+                <select name="locaF" required> <!--Supplement an id here instead of using 'text'-->
+                    <option value="city" selected>City</option>
+                    <option value="zip">Zip</option>
+                    <option value="curr">Current Location</option>
+                </select>
+        </form>
+    </div>
+    <div id="buttonDIV">
+        <button name="enter" type="submit" id="enterB">Enter</button>
+    </div>
+
+
+
+
+
+
+
+
 
 
     <footer> <!--This makes the footer appear-->
