@@ -8,20 +8,22 @@
  *
  * - zomato-js-sdk for using Zomato API Library functions
  *   https://github.com/ameykshirsagar/zomato-js-sdk
+ *
+ * - Google Geocoding API for converting city to co-ordinates
+ *   https://developers.google.com/maps/documentation/geocoding/start
  */
 
 
 /**
- * Function to get location of the user
+ * Function to get the location of the user using Google Geolocation API
  */
 function getLocation() {
     if( ! navigator.geolocation ) {
-	 	// do something
-	 	// maybe we should make the user enter address or zip code or
-	 	// if address or zip is saved to profile pull it
+	 	// no location support
         alert( "Yikes! Your browser does not support geolocation :(" );
 	}
 	else if( navigator.geolocation ) {
+        // location is supported
         navigator.geolocation.getCurrentPosition( getLocationSuccess, getLocationFailure );
         
 	}
@@ -29,7 +31,9 @@ function getLocation() {
 
 
 /**
- * Function to handle success of getting current position
+ * Function to handle success of getting current location
+ * Uses zomato-js-sdk to pull restaurants in vicinity of location
+ * Creates array of restaurant objects with relevant information
  */
 function getLocationSuccess( position ) {
     var latlng = {
@@ -41,24 +45,26 @@ function getLocationSuccess( position ) {
         // we got the restaurants, populate and return
         var restaurantObjects = new Array();
         var nearbyRestaurants = restaurants.nearby_restaurants;
-        //console.log( restaurants );
+        
         for( var i = 0; i < Object.keys( nearbyRestaurants ).length; i++ ) {
-            var re = nearbyRestaurants[ i ].restaurant;
-            console.log( re.name );
+            var r = nearbyRestaurants[ i ].restaurant;
             restaurantObjects.push( {
-                name: re.name,
-                url: re.url,
-                location: re.location,
-                cuisine: re.cuisine,
-                price_range: re.price_range,
-                user_rating: re.user_rating,
-                featured_image: re.featured_image,
-                menu_url: re.menu_url
+                name: r.name,
+                url: r.url,
+                location: r.location,
+                cuisine: r.cuisine,
+                price_range: r.price_range,
+                user_rating: r.user_rating,
+                featured_image: r.featured_image,
+                menu_url: r.menu_url
             } );
         }
         localStorage.setItem( "restaurants", restaurantObjects );
+        return;
     }, function( error ) {
-        // life sucks, search failed
+        // search failed
+        alert( "Your search returned no results!" );
+        return;
     } );
 }
 
@@ -67,6 +73,51 @@ function getLocationSuccess( position ) {
  * Function to handle failure to get current position
  */
 function getLocationFailure() {
-     // we need to access user profile's default location
-     alert( "Yikes! There was an unknown error in getting your location!" );
+    alert( "Yikes! There was an unknown error in getting your location!" );
+    return;
+}
+
+
+function cityToCoord( city ) {
+    // Initialize the geocoder
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode( {
+        address: city
+    }, function( results, status ) {
+        if( status === google.maps.GeocoderStatus.OK ) { 
+            // geocoding successful
+            var latlng = {
+                latitude: results[ 0 ].geometry.location.latitude,
+                longitude: results[ 0 ].geometry.location.longitude
+            };
+            Zomato.geocode( latlng, function( restaurants ) {
+                var restaurantObjects = Array();
+                var nearbyRestaurants = restaurantObjects.nearby_restaurants;
+                
+                for( var i = 0; i < Object.keys( nearbyRestaurants ).length; i++ ) {
+                    var r = nearbyRestaurants[ i ].restaurant;
+                    restaurantObjects.push( {
+                        name: r.name,
+                        url: r.url,
+                        location: r.location,
+                        cuisine: r.cuisine,
+                        price_range: r.price_range,
+                        user_rating: r.user_rating,
+                        featured_image: r.featured_image,
+                        menu_url: r.menu_url
+                    } );
+                }
+                localStorage.setItem( "restaurants", restaurantObjects );
+                return;
+            }, function( error ) {
+                    alert( "No restaurants in your location!" );
+                } 
+            );
+        }
+        else {
+            // geocoding failed
+            alert( "Unknown error converting " + city + " to co-ordinates!" );
+            return;
+        }
+    } );
 }
