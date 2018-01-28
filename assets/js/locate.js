@@ -14,6 +14,9 @@
  */
 
 
+/**
+ * A helper function  
+ */
 function zomatoCall( latlng ) {
     Zomato.geocode( latlng, function( restaurants ) {
         // we got the restaurants, populate and return
