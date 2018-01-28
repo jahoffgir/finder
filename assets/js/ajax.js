@@ -4,7 +4,9 @@
  * 				   d, path to get to data in API
  * Example: zFLT('get',{'path':'/[path]/'}).done(function(json){...});
  */
+
  function zFLT( d ){
+ 	console.log('zFLT');
  	return $.ajax({
  		cache: false,
  		async: true,
