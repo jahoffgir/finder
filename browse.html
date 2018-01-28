@@ -16,6 +16,12 @@
     
 </head>
 <body>
+    <script>
+        $(function(){
+            $("#includedContent").load("navBar.html");
+        });
+    </script>
+    <div id="includedContent"></div>
     <div id="touchsurface">
         <!--  Slider   -->
         <div class="slider-wrap">
@@ -39,6 +45,10 @@
         </div>
     </div>   
     <script type="text/javascript" src="./assets/js/slider.js"></script>
-
+    <footer> <!--This makes the footer appear-->
+        <img src="media/biglogo.png" alt="Big Logo" height="15%" width="15%">
+        <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> JKBI</p>
+        <a href="https://github.com/jahoffgir/finnder">GitHub</a>
+    </footer>
 </body>
 </html>
