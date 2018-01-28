@@ -37,7 +37,7 @@ function zomatoCall( latlng ) {
                 menu_url: r.menu_url
             } );
         }
-        localStorage.setItem( "restaurants", restaurantObjects );
+        sessionStorage.setItem( "restaurants", restaurantObjects );
         return;
     }, function( error ) {
         alert( "Your search returned no results!" );
