@@ -5,10 +5,10 @@
  * @param index - index of the restaurant from object in local storage
  */
  // NOTE: index will incrememented and updated in local storage anytime smash/pass 
- sessionStorage.setItem("index":0);
+ localStorage.setItem("index":0);
  function getRestaurantPreview(index){
 	// 	get restaurant at the specific index
-	var $restaurant = sessionStorage.getItem('restaurants')[index];
+	var $restaurant = localStorage.getItem('restaurants')[index];
 
 	// create h1 tag with restaurant name
 	var $restaurantName = $restaurant.name;
@@ -46,5 +46,5 @@
 	$('#previewInfo').append($ratingTag);
 	
 
-	sessionStorage.setItem("index", index+1);
+	localStorage.setItem("index", index+1);
  }

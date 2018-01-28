@@ -108,11 +108,11 @@ if (navigator.msMaxTouchPoints) {
                 }
                 
                 
-                indx = sessionStorage.getItem("curser");
-                arr = sessionStorage.getItem("restaurants");
+                indx = localStorage.getItem("curser");
+                arr = localStorage.getItem("restaurants");
                 // Adds a different restaurant pic
                 document.getElementsByClassName('slide-image')[1].setAttribute("src", arr[indx].featured_image  );
-                sessionStorage.setItem("curser", indx + 1);
+                localStorage.setItem("curser", indx + 1);
                 // timeout for the image replacement
                 window.setTimeout(function() {
                     location.reload(slider.js);

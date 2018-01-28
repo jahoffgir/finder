@@ -22,7 +22,7 @@ function zomatoCall( latlng ) {
         // we got the restaurants, populate and return
         var restaurantObjects = new Array();
         var nearbyRestaurants = restaurants.nearby_restaurants;
-        console.log( sessionStorage.getItem( "ZOMATO_API_ID" ) );
+        console.log( localStorage.getItem( "ZOMATO_API_ID" ) );
         for( var i = 0; i < Object.keys( nearbyRestaurants ).length; i++ ) {
             var r = nearbyRestaurants[ i ].restaurant;
             console.log( r.name );
@@ -38,7 +38,7 @@ function zomatoCall( latlng ) {
             ] );
         }
         console.log( restaurantObjects );
-        sessionStorage.setItem( "restaurants", restaurantObjects );
+        localStorage.setItem( "restaurants", restaurantObjects );
         return;
     }, function( error ) {
         alert( "Your search returned no results!" );
