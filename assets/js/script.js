@@ -30,9 +30,9 @@ function getLocation() {
      // Reverse geocode the latitude and longitude
      // to get an approximate location
      gc.geocode( 
-         { 'location': latlng },
-         { 'key': "AIzaSyC4251SJyy4ClZ7NWsumqqG1c0zpui0ViU" }, // this is the API Key
-         { 'language': "en" }, // results will be in English
+         { "location": latlng },
+         { "key": "AIzaSyC4251SJyy4ClZ7NWsumqqG1c0zpui0ViU" }, // this is the API Key
+         { "language": "en" }, // results will be in English
          function( results, status ) {
              switch( status ) {
                  case "OK": 
