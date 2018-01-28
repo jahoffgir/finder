@@ -4,8 +4,6 @@
     padding: 0;
 }
 
-
-
 ul {
     list-style-type: none;
     margin: 0;
@@ -24,9 +22,33 @@ li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ff454f;
+}
+#logo a{
+    padding: 0px;
 }
 
 /* Change the link color to #111 (black) on hover */
 li a:hover {
     background-color: #111;
 }
+
+footer{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+    display: block;
+    color: white;
+    background-color: #333;
+}
+
+/*.image{*/
+    /*height: 800px;*/
+    /*width: 100px;*/
+    /*align-content: center;*/
+/*}*/
