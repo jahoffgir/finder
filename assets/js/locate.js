@@ -14,6 +14,34 @@
  */
 
 
+function zomatoCall( latlng ) {
+    Zomato.geocode( latlng, function( restaurants ) {
+        // we got the restaurants, populate and return
+        var restaurantObjects = new Array();
+        var nearbyRestaurants = restaurants.nearby_restaurants;
+        
+        for( var i = 0; i < Object.keys( nearbyRestaurants ).length; i++ ) {
+            var r = nearbyRestaurants[ i ].restaurant;
+            restaurantObjects.push( {
+                name: r.name,
+                url: r.url,
+                location: r.location,
+                cuisine: r.cuisine,
+                price_range: r.price_range,
+                user_rating: r.user_rating,
+                featured_image: r.featured_image,
+                menu_url: r.menu_url
+            } );
+        }
+        localStorage.setItem( "restaurants", restaurantObjects );
+        return;
+    }, function( error ) {
+        alert( "Your search returned no results!" );
+        return;
+    } )
+}
+
+
 /**
  * Function to get the location of the user using Google Geolocation API
  */
@@ -40,32 +68,8 @@ function getLocationSuccess( position ) {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
     }
-    
-    Zomato.geocode( latlng, function( restaurants ) {
-        // we got the restaurants, populate and return
-        var restaurantObjects = new Array();
-        var nearbyRestaurants = restaurants.nearby_restaurants;
-        
-        for( var i = 0; i < Object.keys( nearbyRestaurants ).length; i++ ) {
-            var r = nearbyRestaurants[ i ].restaurant;
-            restaurantObjects.push( {
-                name: r.name,
-                url: r.url,
-                location: r.location,
-                cuisine: r.cuisine,
-                price_range: r.price_range,
-                user_rating: r.user_rating,
-                featured_image: r.featured_image,
-                menu_url: r.menu_url
-            } );
-        }
-        localStorage.setItem( "restaurants", restaurantObjects );
-        return;
-    }, function( error ) {
-        // search failed
-        alert( "Your search returned no results!" );
-        return;
-    } );
+    zomatoCall( latlng );
+    return;
 }
 
 
@@ -78,11 +82,11 @@ function getLocationFailure() {
 }
 
 
-function cityToCoord( city ) {
+function addressToRestaurants( address ) {
     // Initialize the geocoder
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode( {
-        address: city
+        address: address
     }, function( results, status ) {
         if( status === google.maps.GeocoderStatus.OK ) { 
             // geocoding successful
@@ -90,29 +94,8 @@ function cityToCoord( city ) {
                 latitude: results[ 0 ].geometry.location.latitude,
                 longitude: results[ 0 ].geometry.location.longitude
             };
-            Zomato.geocode( latlng, function( restaurants ) {
-                var restaurantObjects = Array();
-                var nearbyRestaurants = restaurantObjects.nearby_restaurants;
-                
-                for( var i = 0; i < Object.keys( nearbyRestaurants ).length; i++ ) {
-                    var r = nearbyRestaurants[ i ].restaurant;
-                    restaurantObjects.push( {
-                        name: r.name,
-                        url: r.url,
-                        location: r.location,
-                        cuisine: r.cuisine,
-                        price_range: r.price_range,
-                        user_rating: r.user_rating,
-                        featured_image: r.featured_image,
-                        menu_url: r.menu_url
-                    } );
-                }
-                localStorage.setItem( "restaurants", restaurantObjects );
-                return;
-            }, function( error ) {
-                    alert( "No restaurants in your location!" );
-                } 
-            );
+            zomatoCall( latlng );
+            return;
         }
         else {
             // geocoding failed
