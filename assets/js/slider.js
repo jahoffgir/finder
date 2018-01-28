@@ -106,11 +106,13 @@ if (navigator.msMaxTouchPoints) {
                     el.setAttribute("src", " ");
                     document.getElementsByClassName('slide')[0].parentNode.appendChild(el);
                 }
-                indx = localStorage.getItem("curser");
-                arr = localStorage.getItem("restaurants");
+                
+                
+                indx = sessionStorage.getItem("curser");
+                arr = sessionStorage.getItem("restaurants");
                 // Adds a different restaurant pic
                 document.getElementsByClassName('slide-image')[1].setAttribute("src", arr[indx].featured_image  );
-                localStorage.setItem("curser", indx + 1);
+                sessionStorage.setItem("curser", indx + 1);
                 // timeout for the image replacement
                 window.setTimeout(function() {
                     location.reload(slider.js);
