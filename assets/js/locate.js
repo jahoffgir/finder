@@ -34,15 +34,41 @@ function zomatoCall( latlng ) {
                 r.price_range,
                 r.user_rating,
                 r.featured_image,
-                                   r.menu_url
+                r.menu_url
             ] );
         }
+        console.log( restaurantObjects );
         sessionStorage.setItem( "restaurants", restaurantObjects );
         return;
     }, function( error ) {
         alert( "Your search returned no results!" );
         return;
     } )
+}
+
+
+/**
+ * Function to handle success of getting current location
+ * Uses zomato-js-sdk to pull restaurants in vicinity of location
+ * Creates array of restaurant objects with relevant information
+ */
+function getLocationSuccess( position ) {
+    var latlng = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+    }
+    console.log( latlng );
+    zomatoCall( latlng );
+    return;
+}
+
+
+/**
+ * Function to handle failure to get current position
+ */
+function getLocationFailure() {
+    alert( "Yikes! There was an unknown error in getting your location!" );
+    return;
 }
 
 
@@ -60,30 +86,6 @@ function getLocation() {
         
 	}
  }
-
-
-/**
- * Function to handle success of getting current location
- * Uses zomato-js-sdk to pull restaurants in vicinity of location
- * Creates array of restaurant objects with relevant information
- */
-function getLocationSuccess( position ) {
-    var latlng = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-    }
-    zomatoCall( latlng );
-    return;
-}
-
-
-/**
- * Function to handle failure to get current position
- */
-function getLocationFailure() {
-    alert( "Yikes! There was an unknown error in getting your location!" );
-    return;
-}
 
 
 function addressToRestaurants( address ) {
