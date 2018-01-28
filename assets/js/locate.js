@@ -102,7 +102,7 @@ function addressToRestaurants( address ) {
         }
         else {
             // geocoding failed
-            alert( "Unknown error converting " + city + " to co-ordinates!" );
+            alert( "Unknown error converting " + address + " to co-ordinates!" );
             return;
         }
     } );
