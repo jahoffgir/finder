@@ -8,7 +8,7 @@ function getLocation() {
     if( !navigator.geolocation ) {
 	 	// do something
 	 	// maybe we should make the user enter address or zip code or
-	 	// if address/ zip is saved to profile pull it
+	 	// if address or zip is saved to profile pull it
 	}
 	else if( navigator.geolocation ) {
 		navigator.geolocation.getCurrentPosition( getLocationSuccess, getLocationFailure )
@@ -63,22 +63,27 @@ function getLocation() {
                      
                  case "ZERO_RESULTS": 
                      // no results
+                     alert( "No matches for your location!" );
                      break;
                      
                  case "OVER_QUERY_LIMIT":
                      // exceeded free query limit
+                     alert( "Exceeded Free API User Limit!" );
                      break;
                      
                  case "REQUEST_DENIED":
                      // request was denied :(
+                     alert( "Request Denied!" );
                      break;
                      
                  case "INVALID_REQUEST":
                      // some query is missing
+                     alert( "Invalid Request!" );
                      break;
                      
                  default:
                      // unknown or server error
+                     alert( "Unknown Server Error!" );
                      break;
                      
              }
@@ -91,7 +96,7 @@ function getLocation() {
  * Function to handle failure to get current position
  */
  function getLocationFailure() {
-     
+     // we need to access user profile's default location
  }
 
 
