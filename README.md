@@ -32,3 +32,24 @@ Google API Key: AIzaSyC4251SJyy4ClZ7NWsumqqG1c0zpui0ViU
 
 # TODO
 * Fix the "Object object" issue when extracting data
+
+# New Process Flow
+index.html (getLocation of user)
+--> redirects to browser.html, uses preview.js to populate page
+    --> preview page click --> redirects to the full restaurant page
+    --> swipe right should store smashed restaurants for later views in 'session'
+    --> swipe left just moves the index of results
+
+# Where We Left Off 1/28/18
+- getLocation results in array of "object":"Object"
+- can't convert address or city or zip to long and lat coordinates, so now just relying 
+    on getting user's coordinates from device
+- need to work on:
+    - integrating the locate.js into index.html
+    - integrating browser.html and preview.js
+    - make the full restaurant page when clicked
+- would like to have:
+    - login (requires database)
+    - ability to select all restaurants within a distance radius not just in a city
+    - filter more specifically : types of cuisine, price, rating, etc..
+    
