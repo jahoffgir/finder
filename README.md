@@ -6,6 +6,8 @@ BrickHack4 - Finnder Like Tinder: users will "smash" or "pass" on foods and will
 * Jahongir Amirkulov 
 * Karthik Iyer
 
+SLACK CHANNEL: finnderworkspace.slack.com
+Trello: https://trello.com/b/72bKkm4N/finnder
 
 # Project Layout
 - Sign-in: possibly use Facebook sign-in
